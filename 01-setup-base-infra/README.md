@@ -12,7 +12,7 @@ You would need to create Access Key and Secret Key.
 
 Once access key and secrets are created trigger following command and enter the details.
 
-    ![alt text](image.png)
+![alt text](image.png)
 
 
 OR 
