@@ -2,6 +2,11 @@
 .terraform/
 .ssh/
 
+02-resources/
+03-modular/
+04-remote-cloud/
+04-remote-s3/
+
 # .tfstate files
 *.tfstate
 *.tfstate.*
