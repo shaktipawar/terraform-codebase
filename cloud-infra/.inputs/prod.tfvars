@@ -1,7 +1,7 @@
 general_info = {
   project     = "cloudcake"
   created_by  = "terraform"
-  region = "us-east-1"
+  region = "ap-south-1"
 }
 
 vpc = {
@@ -17,22 +17,32 @@ key_path = ".ssh/prod.pub"
 subnets = [
   {
     cidr_block        = "10.0.1.0/24",
-    availability_zone = "us-east-1a",
+    availability_zone = "ap-south-1a",
     is_public         = true
   },
   {
-    cidr_block        = "10.0.1.0/24",
-    availability_zone = "us-east-1a",
-    is_public         = false
-  },
-  {
     cidr_block        = "10.0.2.0/24",
-    availability_zone = "us-east-1b",
-    is_public         = false
+    availability_zone = "ap-south-1b",
+    is_public         = true
   },
   {
     cidr_block        = "10.0.3.0/24",
-    availability_zone = "us-east-1c",
+    availability_zone = "ap-south-1c",
+    is_public         = true
+  },
+  {
+    cidr_block        = "10.0.4.0/24",
+    availability_zone = "ap-south-1a",
+    is_public         = false
+  },
+  {
+    cidr_block        = "10.0.5.0/24",
+    availability_zone = "ap-south-1b",
+    is_public         = false
+  },
+  {
+    cidr_block        = "10.0.6.0/24",
+    availability_zone = "ap-south-1c",
     is_public         = false
   },
 ]
@@ -51,37 +61,37 @@ ec2 = [{
   ami           = "ami-0e35ddab05955cf57"
   instance_type = "t2.micro"
   subnet_type = "public"
-  user_data = "./userdata-scripts/ubuntu_webserver.sh"
-},
-{
-  ami           = "ami-0e35ddab05955cf57"
-  instance_type = "t2.micro"
-  subnet_type = "public"
-  user_data = "./userdata-scripts/ubuntu_webserver.sh"
+  user_data = "./userdata-scripts/ubuntu_webserver.tpl"
 },
 {
   ami           = "ami-0e35ddab05955cf57"
   instance_type = "t2.micro"
   subnet_type = "private"
-  user_data = "./userdata-scripts/ubuntu_webserver.sh"
+  user_data = "./userdata-scripts/ubuntu_webserver.tpl"
 },
 {
   ami           = "ami-0e35ddab05955cf57"
   instance_type = "t2.micro"
   subnet_type = "private"
-  user_data = "./userdata-scripts/ubuntu_webserver.sh"
+  user_data = "./userdata-scripts/ubuntu_webserver.tpl"
 },
 {
   ami           = "ami-0e35ddab05955cf57"
   instance_type = "t2.micro"
   subnet_type = "private"
-  user_data = "./userdata-scripts/ubuntu_webserver.sh"
+  user_data = "./userdata-scripts/ubuntu_webserver.tpl"
 },
 {
   ami           = "ami-0e35ddab05955cf57"
   instance_type = "t2.micro"
   subnet_type = "private"
-  user_data = "./userdata-scripts/ubuntu_webserver.sh"
+  user_data = "./userdata-scripts/ubuntu_webserver.tpl"
+},
+{
+  ami           = "ami-0e35ddab05955cf57"
+  instance_type = "t2.micro"
+  subnet_type = "private"
+  user_data = "./userdata-scripts/ubuntu_webserver.tpl"
 }]
 
 

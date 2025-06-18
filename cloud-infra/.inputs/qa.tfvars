@@ -63,7 +63,7 @@ ec2 = [{
 {
   ami           = "ami-0e35ddab05955cf57"
   instance_type = "t2.micro"
-  subnet_type = "public" # "public" or "private"
+  subnet_type = "private" # "public" or "private"
   user_data = "./userdata-scripts/ubuntu_webserver.tpl"
 }]
 
