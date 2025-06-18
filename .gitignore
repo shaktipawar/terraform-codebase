@@ -1,11 +1,14 @@
 # Local .terraform directories
 .terraform/
 .ssh/
-
+01-setup-base-infra/
 02-resources/
 03-modular/
 04-remote-cloud/
-04-remote-s3/
+05-remote-s3/
+06-setup-base-infra-nat/
+07-web-app-hosting/
+08-vpc/
 
 # .tfstate files
 *.tfstate
