@@ -1,4 +1,5 @@
 # Module : VPC
+This module provisions a custom Virtual Private Cloud (VPC) along with public and private subnets, an internet gateway, and route tables. It's designed to be reusable and environment-agnostic.
 <br />
 
 ### Resources
@@ -49,7 +50,7 @@ These output values expose key resource attributes that can be used in other mod
 <br> <br> <br>
 
 # Module : Security Group
-
+This module provisions a security group along with its ingress and egress rules. Rules can be defined dynamically using maps of objects.
 <br>
 
 ### Resources
@@ -81,7 +82,7 @@ These output values expose key resource attributes that can be used in other mod
 <br><br><br>
 
 # Module : Route53
-
+This module creates A records in a Route 53 hosted zone, pointing to a Load Balancer (via alias records). It uses a loop to dynamically create multiple records.
 <br>
 
 ### Resources
@@ -102,7 +103,7 @@ These output values expose key resource attributes that can be used in other mod
 <br><br><br>
 
 # Load Balancer
-
+This module provisions an Application Load Balancer (ALB), attaches backend EC2 instances via target groups, and configures listeners (HTTP/HTTPS) to route traffic.
 <br>
 
 ### Resources
@@ -136,7 +137,7 @@ These output values expose key resource attributes that can be used in other mod
 <br><br><br>
 
 # Instance Profile
-
+This module provisions an IAM Instance Profile for EC2 instances and associates it with a pre-existing IAM role (commonly used for CloudWatch or SSM permissions).
 <br>
 
 ### Resources
@@ -155,7 +156,7 @@ These output values expose key resource attributes that can be used in other mod
 <br><br><br>
 
 # IAM
-
+This module provisions the necessary IAM Role and Policy required by EC2 instances to publish logs to CloudWatch Logs.
 <br>
 
 ### Resources
@@ -183,7 +184,7 @@ These output values expose key resource attributes that can be used in other mod
 <br><br><br>
 
 # EC2
-
+This module provisions EC2 instances based on user-defined configuration, allowing flexible creation of multiple instances with unique settings including AMI, subnet, user data, and IAM profile.
 <br>
 
 ### Resources
@@ -209,7 +210,7 @@ These output values expose key resource attributes that can be used in other mod
 <br><br><br>
 
 # Cloudwatch Logs
-
+This module configures CloudWatch Log Group for centralized logging and attaches the necessary IAM policy to the specified role for enabling logging from services like EC2.
 <br>
 
 ### Resources
