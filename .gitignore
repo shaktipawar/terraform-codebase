@@ -1,14 +1,7 @@
 # Local .terraform directories
 .terraform/
-.ssh/
-01-setup-base-infra/
-02-resources/
-03-modular/
-04-remote-cloud/
-05-remote-s3/
-06-setup-base-infra-nat/
-07-web-app-hosting/
-08-vpc/
+*.ppk
+*.pem
 
 # .tfstate files
 *.tfstate
@@ -22,8 +15,9 @@ crash.*.log
 # password, private keys, and other secrets. These should not be part of version 
 # control as they are data points which are potentially sensitive and subject 
 # to change depending on the environment.
-*.tfvars
-*.tfvars.json
+
+#*.tfvars
+#*.tfvars.json
 
 # Ignore override files as they are usually used to override resources locally and so
 # are not checked in

@@ -28,7 +28,7 @@ resource "aws_lb_target_group_attachment" this {
 resource "aws_lb" this {
   name                             = var.load_balancer.name
   internal                         = var.load_balancer.is_internal
-  load_balancer_type               = "application" #var.load_balancer.load_balancer_type
+  load_balancer_type               = "application"
   security_groups                  = var.load_balancer.security_groups
   subnets                          = var.load_balancer.subnets
   enable_cross_zone_load_balancing = var.load_balancer.enable_cross_zone_load_balancing

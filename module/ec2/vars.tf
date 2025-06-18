@@ -5,7 +5,7 @@ variable "ec2"{
         key_name               = string
         subnet_id              = string
         vpc_security_group_ids = list(string)
-        user_data              = string # Path to the user data script
+        user_data              = string # User data script
         iam_instance_profile_name   = string
         tags                   = map(string)
     }))

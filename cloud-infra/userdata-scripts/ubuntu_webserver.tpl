@@ -61,7 +61,6 @@ log "Execution time: $EXECUTION_TIME"
 log "Environment: $ENVIRONMENT"
 log "LOG GROUP NAME : ${log_group_name}"
 
-#echo "UBUNTU SERVER - NGINX - $PUBLIC_IP" | sudo tee /var/www/html/index.html | logger -t userdata -s
 echo "<html>
   <body>
     <h1>Welcome to NGINX on EC2</h1>

@@ -1,6 +1,3 @@
-# output "vpc_details" {
-#   value = aws_vpc.this
-# }
 output "vpc_id" {
   value = aws_vpc.this.id
 }
@@ -21,10 +18,6 @@ output "private_subnet_ids" {
   ]
 }
 
-# output "internet_gateway_details" {
-#   value = aws_internet_gateway.this
-# }
-
 output "internet_gateway_id" {
   value = aws_internet_gateway.this.id
 }
@@ -44,26 +37,3 @@ output "public_route_table_ids" {
 output "private_route_table_ids" {
   value = aws_route_table.private.id
 }
-
-
-# output "elastic_ip_ids" {
-#   value = {
-#     for key, eip in aws_eip.elastic_ip : key => {
-#       id = eip.id
-#     }
-#   }
-# }
-
-# output "nat_gateway_ids" {
-#   value = {
-#     for key, nat_gw in aws_nat_gateway.nat_gateway : key => {
-#       id = nat_gw.id
-#     }
-#   }
-# }
-
-# output "private_route_table_ids" {
-#   value = [
-#     for rt in aws_route_table.route_table_private : rt.id
-#   ]
-# }

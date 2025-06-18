@@ -48,33 +48,3 @@ variable "security_group_rules_egress" {
     tags              = map(string)
   }))
 }
-
-
-
-# variable "security_group" {
-#   type = map(object({
-#     name        = string
-#     description = string
-#     vpc_id      = string
-#     tags        = map(string)
-#     ingress = list(object({
-#       from_port        = number
-#       to_port          = number
-#       ip_protocol      = string
-#       is_ipv4          = bool
-#       cidr_ipv4_blocks = list(string)
-#       cidr_ipv6_blocks = list(string)
-#       tags              = map(string)
-#     }))
-#     egress = list(object({
-#       from_port        = number
-#       to_port          = number
-#       ip_protocol      = string
-#       is_ipv4          = bool
-#       cidr_ipv4_blocks = list(string)
-#       cidr_ipv6_blocks = list(string)
-#       tags              = map(string)
-#     }))
-#   }))
-#   description = "List of security groups with their configurations"
-# }

@@ -28,13 +28,6 @@ variable "internet_gateway" {
   })
 }
 
-# variable "need_key_pair" {
-#   type        = bool
-#   description = "Flag to indicate if a key pair is needed for SSH access."
-#   default     = false
-
-# }
-
 # SINGLE RESOURCE
 variable "key_pair" {
   description = "Groups attributes of aws key_pair resource"
@@ -89,38 +82,3 @@ variable "route_table_associations" {
     route_table_id = string
   }))
 }
-
-
-# variable "public_subnet_count" {
-#   type    = number
-#   default = 0
-# }
-
-# variable "private_subnet_count" {
-#   type    = number
-#   default = 0
-# }
-
-# variable "elastic_ips" {
-#   type = list(object({
-#     tags   = map(string)
-#   }))
-# }
-
-# variable "nat_gateway" {
-#   type = list(object({
-#     allocation_id = string
-#     subnet_id     = string
-#     tags          = map(string)
-#   }))
-# }
-
-# variable "route_table_private" {
-#   type = map(object({
-#     vpc_id = string
-#     cidr_block              = string
-#     ipv6_cidr_block         = string
-#     nat_gateway_id     = string
-#     tags  = map(string)
-#   }))
-# }

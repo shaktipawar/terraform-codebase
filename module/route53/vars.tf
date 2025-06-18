@@ -17,14 +17,3 @@ variable "a_records"{
   description = "List of A records to create in Route 53"
   type = list(string)
 }
-
-
-# variable "root_domain_name" {
-#   description = "Root domain name for the Route 53 records"
-#   type        = string  
-# }
-
-# variable "subdomain_name" {
-#   description = "Subdomain name for the Route 53 records"
-#   type        = string
-# }

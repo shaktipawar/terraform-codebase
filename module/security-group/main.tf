@@ -11,8 +11,6 @@ resource "aws_vpc_security_group_ingress_rule" "security_group_rules" {
   ip_protocol       = each.value["ip_protocol"]
   tags              = each.value["tags"]
 
-  # from_port         = each.value["from_port"]
-  # to_port           = each.value["to_port"]
   # Conditionally set from_port and to_port only if ip_protocol is not "-1"
   from_port         = each.value["ip_protocol"] != "-1" ? each.value["from_port"] : null
   to_port           = each.value["ip_protocol"] != "-1" ? each.value["to_port"] : null

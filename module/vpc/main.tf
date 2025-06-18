@@ -27,25 +27,22 @@ resource "aws_internet_gateway" this {
 
 resource "aws_key_pair" this {
   #count      = var.need_key_pair ? 1 : 0  # Only create resource if need_key_pair is true
-  key_name   = var.key_pair["key_name"]   #"keypair-terraform-codebase"
-  public_key = var.key_pair["public_key"] #file(".ssh/ssh-keypair-terraform-codebase.pub")
+  key_name   = var.key_pair["key_name"] 
+  public_key = var.key_pair["public_key"]
   tags       = var.key_pair["tags"]
 }
 
 resource "aws_eip" this {
-
     tags = var.elastic_ips.tags
 }
 
 resource "aws_nat_gateway" this {
-    
     allocation_id = var.nat_gateway.allocation_id
     subnet_id = var.nat_gateway.subnet_id
     tags = var.nat_gateway.tags
 }
 
 resource "aws_route_table" "public" {
-
     vpc_id = var.route_table_public.vpc_id
     route {
         cidr_block = var.route_table_public.cidr_block // Allow IPv4 Traffic
@@ -55,7 +52,6 @@ resource "aws_route_table" "public" {
 }
 
 resource "aws_route_table" "private" {
-
     vpc_id = var.route_table_private.vpc_id
     route {
         cidr_block = var.route_table_private.cidr_block // Allow IPv4 Traffic
@@ -65,92 +61,9 @@ resource "aws_route_table" "private" {
 }
 
 resource "aws_route_table_association" this {
-
     for_each = {
         for idx, associations in var.route_table_associations : idx => associations
     }
     subnet_id = each.value.subnet_id
     route_table_id = each.value.route_table_id
 }
-
-
-
-
-
-# resource "aws_route_table" "route_table_private" {
-
-#     # for_each = {
-#     #     for idx, route in var.route_table_private : idx => route
-#     # }
-
-#     # vpc_id = each.value.vpc_id
-    
-#     # route {
-#     #     cidr_block = each.value.cidr_block // Allow IPv4 Traffic
-#     #     nat_gateway_id = each.value.nat_gateway_id
-#     # }
-
-#     # # route {
-#     # #     ipv6_cidr_block = each.value.ipv6_cidr_block // Allow IPv4 Traffic
-#     # #     egress_only_gateway_id = each.value.nat_gateway_id
-#     # # }
-
-#     # tags = each.value.tags
-
-#     vpc_id = var.route_table_private.vpc_id
-    
-#     route {
-#         cidr_block = var.route_table_private.cidr_block // Allow IPv4 Traffic
-#         nat_gateway_id = var.route_table_private.nat_gateway_id
-#     }
-
-#     # route {
-#     #     ipv6_cidr_block = each.value.ipv6_cidr_block // Allow IPv4 Traffic
-#     #     egress_only_gateway_id = each.value.nat_gateway_id
-#     # }
-
-#     tags = var.route_table_private.tags
-# }
-
-# resource "aws_route_table" "route_table_public" {
-
-#     # for_each = {
-#     #     for idx, route in var.route_table : idx => route
-#     # }
-
-#     vpc_id = var.route_table_public.vpc_id
-    
-#     route {
-#         cidr_block = var.route_table_public.cidr_block // Allow IPv4 Traffic
-#         gateway_id = var.route_table_public.internet_gateway_id
-#     }
-
-#     # route{
-#     #     ipv6_cidr_block = var.route_table_public.ipv6_cidr_block // Allow IPv6 Traffic
-#     #     egress_only_gateway_id = var.route_table_public.internet_gateway_id
-#     # }
-
-#     tags = var.route_table_public.tags
-# }
-
-# resource "aws_nat_gateway" "nat_gateway" {
-
-#     # for_each = {
-#     #     for idx, nat in var.nat_gateway : idx => nat
-#     # }
-
-#     # allocation_id = each.value.allocation_id
-#     # subnet_id = each.value.subnet_id
-#     # tags = each.value.tags
-
-#     allocation_id = var.nat_gateway.allocation_id
-#     subnet_id = var.nat_gateway.subnet_id
-#     tags = var.nat_gateway.tags
-# }
-
-# resource "aws_eip" "elastic_ip" {
-#     for_each = {
-#         for idx, eip in var.elastic_ips : idx => eip
-#     }
-#     tags = each.value.tags
-# }

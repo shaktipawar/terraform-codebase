@@ -59,7 +59,9 @@ locals {
   ]
 
   listener_certificate_arn = data.aws_acm_certificate.issued.arn
+
   availability_zones = data.aws_availability_zones.available.names
+  
   unique_subnets_per_az = [
     for az in data.aws_availability_zones.available.names :
     # Filter subnets to get one subnet per availability zone, handle empty collections gracefully
@@ -74,7 +76,9 @@ locals {
   }
 
   log_group_name = "${terraform.workspace}-${var.general_info.project}-${local.prefix["cloudwatch"]}-loggroup"
+  
   instance_profile_name = "${terraform.workspace}-${var.general_info.project}-${local.prefix["ec2-instance-profile"]}"
+  
   hosted_zone_id        = data.aws_route53_zone.hosted_zone.id
 
 }

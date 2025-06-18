@@ -14,7 +14,6 @@ module "cloud-infra" {
   }
 
   # Key Pair configuration parameters for SSH access
-  #need_key_pair = true
   key_pair      = local.key_pair
 
   # Subnet configuration parameters
@@ -38,34 +37,33 @@ module "cloud-infra" {
     tags = local.internet_gateway_tags
   }
 
+  # Elastic IPs configuration parameters
   elastic_ips = {
       tags = local.elastic_ip_tags
   }
   
+  #NAT Gateway configuration parameters
   nat_gateway = {
-    #for idx, elastic_ip in module.cloud-infra.elastic_ip_ids : {
-      allocation_id = module.cloud-infra.elastic_ip_ids #elastic_ip.id
-      subnet_id     = module.cloud-infra.public_subnet_ids[0]
-      tags = local.nat_gateway_tags
-    }
-   
+    allocation_id = module.cloud-infra.elastic_ip_ids
+    subnet_id     = module.cloud-infra.public_subnet_ids[0]
+    tags = local.nat_gateway_tags
+  }
+
   # Public and Private Route Tables configuration parameters
   route_table_public = {
     vpc_id              = module.cloud-infra.vpc_id
-    cidr_block          = var.route_table_public.cidr_block      #var.route_table.cidr_block
-    ipv6_cidr_block     = var.route_table_public.ipv4_cidr_block #var.route_table.ipv6_cidr_block
+    cidr_block          = var.route_table_public.cidr_block      
+    ipv6_cidr_block     = var.route_table_public.ipv4_cidr_block 
     internet_gateway_id = module.cloud-infra.internet_gateway_id
     tags = local.public_route_table_tags
   }
-
+  
   route_table_private = {
-    #for idx, nat_gw in module.cloud-infra.nat_gateway_ids : idx => {
     vpc_id          = module.cloud-infra.vpc_id
-    cidr_block      = var.route_table_private.cidr_block      #var.route_table.cidr_block
-    ipv6_cidr_block = var.route_table_private.ipv4_cidr_block #var.route_table.ipv6_cidr_block
-    nat_gateway_id  = module.cloud-infra.nat_gateway_ids  #nat_gw.id
+    cidr_block      = var.route_table_private.cidr_block      
+    ipv6_cidr_block = var.route_table_private.ipv4_cidr_block 
+    nat_gateway_id  = module.cloud-infra.nat_gateway_ids 
     tags = local.private_route_table_tags
-    #}
   }
 
   route_table_associations = concat([
@@ -78,7 +76,6 @@ module "cloud-infra" {
     # Associate private subnets with private route tables
     for idx, subnet_id in module.cloud-infra.private_subnet_ids : {
       subnet_id      = subnet_id
-      #route_table_id = module.cloud-infra.private_route_table_ids[idx]
       route_table_id = module.cloud-infra.private_route_table_ids
     }
   ])
@@ -353,15 +350,3 @@ module "route53" {
   load_balancer_zone_id = module.load_balancer.load_balancer_zone_id
   hosted_zone_id        = local.hosted_zone_id
 }
-
-
-
-# Elastic IPs and NAT Gateway configuration parameters
-# elastic_ips = [
-#   for idx, item in module.cloud-infra.public_subnet_ids : {
-#     tags = merge(
-#       local.default_tags,
-#       { Name = "${idx + 1}-${local.prefix["elastic_ip"]}-${var.general_info.project}-${terraform.workspace}" }
-#     )
-#   }
-# ]
