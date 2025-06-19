@@ -26,11 +26,6 @@ subnets = [
     is_public         = true
   },
   {
-    cidr_block        = "10.0.3.0/24",
-    availability_zone = "ap-south-1c",
-    is_public         = true
-  },
-  {
     cidr_block        = "10.0.4.0/24",
     availability_zone = "ap-south-1a",
     is_public         = false
@@ -39,12 +34,7 @@ subnets = [
     cidr_block        = "10.0.5.0/24",
     availability_zone = "ap-south-1b",
     is_public         = false
-  },
-  {
-    cidr_block        = "10.0.6.0/24",
-    availability_zone = "ap-south-1c",
-    is_public         = false
-  },
+  }
 ]
 
 route_table_public = {

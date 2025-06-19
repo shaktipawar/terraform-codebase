@@ -1,4 +1,23 @@
-# Module : VPC
+# Prerequisits
+* You need to have a registered domain. 
+* You need to setup Hosted zone on AWS using that Domain
+* You need to create Public certificate using AWS ACM in the same region where you plan to deploy your infrastructure.
+* You need to create IAM user with access_key and secrets with adequate permissions
+* You need to setup AWS Profile on your machine with above access_key and secret.
+
+# Note
+* Ideally Modules must be placed on remote registry like offical Terraform registry / Github. This repo holds module with application code, just for demo purpose. 
+* The only change would come in source tag, once the modules are hosted on remote registry.
+* Refer this Medium article to undertand the requirement of this IaaC. Link : https://shakti-pawar.medium.com/terraform-modules-a-practical-primer-477d156ba92f
+* Image for ref.
+![image info](vpc.png)
+<br />
+<br />
+<br />
+
+
+# Documentation
+## vpc module
 This module provisions a custom Virtual Private Cloud (VPC) along with public and private subnets, an internet gateway, and route tables. It's designed to be reusable and environment-agnostic.
 <br />
 
@@ -47,9 +66,9 @@ These output values expose key resource attributes that can be used in other mod
 | `public_route_table_ids`  | ID of the public route table                                               |
 | `private_route_table_ids` | ID of the private route table                                              |
 
-<br> <br> <br>
+<br> <br>
 
-# Module : Security Group
+## security-group module
 This module provisions a security group along with its ingress and egress rules. Rules can be defined dynamically using maps of objects.
 <br>
 
@@ -79,9 +98,9 @@ This module provisions a security group along with its ingress and egress rules.
 | ------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `security_group_details` | Contains all attributes of the created security group. This includes the security group ID, name, description, VPC ID, and associated tags. Useful when referencing the SG in other modules. |
 
-<br><br><br>
+<br><br>
 
-# Module : Route53
+## route53 module
 This module creates A records in a Route 53 hosted zone, pointing to a Load Balancer (via alias records). It uses a loop to dynamically create multiple records.
 <br>
 
@@ -100,9 +119,9 @@ This module creates A records in a Route 53 hosted zone, pointing to a Load Bala
 | `hosted_zone_id`        | `string`       | ID of the Route 53 hosted zone where records will be created                  | –       |
 | `a_records`             | `list(string)` | List of subdomain A records (e.g., `[ "dev.example.com", "qa.example.com" ]`) | –       |
 
-<br><br><br>
+<br><br>
 
-# Load Balancer
+## load-balancer module
 This module provisions an Application Load Balancer (ALB), attaches backend EC2 instances via target groups, and configures listeners (HTTP/HTTPS) to route traffic.
 <br>
 
@@ -134,9 +153,9 @@ This module provisions an Application Load Balancer (ALB), attaches backend EC2 
 | `load_balancer_dns_name` | DNS name of the ALB to be used in Route53 or direct access    |
 | `load_balancer_zone_id`  | Hosted zone ID of the ALB (used for alias records in Route53) |
 
-<br><br><br>
+<br><br>
 
-# Instance Profile
+## instance-profile module
 This module provisions an IAM Instance Profile for EC2 instances and associates it with a pre-existing IAM role (commonly used for CloudWatch or SSM permissions).
 <br>
 
@@ -153,9 +172,9 @@ This module provisions an IAM Instance Profile for EC2 instances and associates 
 | `instance_profile_name` | `string` | Name of the IAM instance profile to be created     | –       |
 | `cloudwatch_role_name`  | `string` | Name of the IAM role to be associated with profile | –       |
 
-<br><br><br>
+<br><br>
 
-# IAM
+## iam module
 This module provisions the necessary IAM Role and Policy required by EC2 instances to publish logs to CloudWatch Logs.
 <br>
 
@@ -181,9 +200,9 @@ This module provisions the necessary IAM Role and Policy required by EC2 instanc
 | ---------------- | ------------------------------------------------- |
 | `iam_policy_arn` | ARN of the IAM policy created for CloudWatch Logs |
 
-<br><br><br>
+<br><br>
 
-# EC2
+## ec2 module
 This module provisions EC2 instances based on user-defined configuration, allowing flexible creation of multiple instances with unique settings including AMI, subnet, user data, and IAM profile.
 <br>
 
@@ -207,9 +226,9 @@ This module provisions EC2 instances based on user-defined configuration, allowi
 | ------------- | ---------------------------------------------------------------------------- |
 | `ec2_details` | List of created EC2 instances with their `id`, `public_ip`, and `private_ip` |
 
-<br><br><br>
+<br><br>
 
-# Cloudwatch Logs
+## cloudwatch-logs module
 This module configures CloudWatch Log Group for centralized logging and attaches the necessary IAM policy to the specified role for enabling logging from services like EC2.
 <br>
 
